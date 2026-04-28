@@ -391,6 +391,85 @@
   .changelog-list li.fix::before { content: '✕'; color: var(--red); font-size: 10px; margin-top: 5px; }
   .changelog-list li.add::before { content: '+'; color: #4a9a6a; }
 
+  /* ── Install guide ────────────────────────────────────────────────── */
+  .install-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .install-card {
+    background: var(--panel);
+    padding: 32px 28px;
+  }
+
+  .install-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+
+  .install-os-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bright);
+  }
+
+  .install-steps {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    counter-reset: steps;
+  }
+
+  .install-steps li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 15px;
+    color: var(--text);
+    counter-increment: steps;
+  }
+
+  .install-steps li::before {
+    content: counter(steps);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--gold);
+    border: 1px solid rgba(200,168,75,0.3);
+    min-width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .install-note {
+    margin-top: 18px;
+    padding: 12px 16px;
+    background: rgba(200,168,75,0.05);
+    border-left: 2px solid rgba(200,168,75,0.3);
+    font-size: 13px;
+    color: var(--fog);
+    font-style: italic;
+  }
+
+  code {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    background: rgba(255,255,255,0.06);
+    padding: 2px 7px;
+    border-radius: 2px;
+    color: var(--gold2);
+  }
+
   /* ── Contact ──────────────────────────────────────────────────────── */
   .contact-grid {
     display: grid;
@@ -423,11 +502,7 @@
   .contact-card:hover { background: #111122; }
   .contact-card:hover::before { opacity: 1; }
 
-  .contact-icon {
-    color: var(--gold);
-    opacity: 0.7;
-    transition: opacity 0.3s;
-  }
+  .contact-icon { color: var(--gold); opacity: 0.7; transition: opacity 0.3s; }
   .contact-card:hover .contact-icon { opacity: 1; }
 
   .contact-label {
@@ -478,11 +553,12 @@
   .reveal-delay-3 { transition-delay: 0.36s; }
 
   @media (max-width: 640px) {
-    .lore-details { grid-template-columns: 1fr; }
-    .contact-grid { grid-template-columns: 1fr; }
+    .lore-details  { grid-template-columns: 1fr; }
+    .contact-grid  { grid-template-columns: 1fr; }
+    .install-grid  { grid-template-columns: 1fr; }
     section { padding: 72px 20px; }
     .download-grid { flex-direction: column; align-items: center; }
-    .btn-download { width: 100%; max-width: 320px; justify-content: center; }
+    .btn-download  { width: 100%; max-width: 320px; justify-content: center; }
   }
 </style>
 </head>
@@ -520,17 +596,17 @@
         <span class="os-sub">x64 · .zip</span>
       </div>
     </a>
-    <a href="Mac compatibility has not been released yet!" class="btn-download secondary" download>
+    <a href="#" class="btn-download secondary" style="opacity:0.45;pointer-events:none;">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="btn-os-label">
-        <span class="os-name">macOS (COMING SOON!)</span>
+        <span class="os-name">macOS — Soon</span>
         <span class="os-sub">Apple Silicon · M1+</span>
       </div>
     </a>
-    <a href="Mac compatibility has not been released yet!" class="btn-download secondary" download>
+    <a href="#" class="btn-download secondary" style="opacity:0.45;pointer-events:none;">
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1v9M4 7l4 4 4-4M2 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="btn-os-label">
-        <span class="os-name">macOS (COMING SOON!)</span>
+        <span class="os-name">macOS — Soon</span>
         <span class="os-sub">Intel · x64</span>
       </div>
     </a>
@@ -593,6 +669,59 @@
   </div>
 </section>
 
+<!-- ── INSTALL GUIDE ─────────────────────────────────────────────────── -->
+<section class="changelog-section">
+  <p class="section-label reveal">Getting started</p>
+  <h2 class="section-title reveal reveal-delay-1">How to install &amp; run</h2>
+
+  <div class="install-grid reveal reveal-delay-2">
+
+    <div class="install-card">
+      <div class="install-card-header">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="1" width="7" height="7" fill="currentColor" opacity="0.8"/><rect x="10" y="1" width="7" height="7" fill="currentColor" opacity="0.8"/><rect x="1" y="10" width="7" height="7" fill="currentColor" opacity="0.8"/><rect x="10" y="10" width="7" height="7" fill="currentColor" opacity="0.8"/></svg>
+        <span class="install-os-badge">Windows</span>
+      </div>
+      <ol class="install-steps">
+        <li>Click the <strong>Windows</strong> download button above</li>
+        <li>Once downloaded, right-click the <code>.zip</code> file and select <strong>Extract All</strong></li>
+        <li>Open the extracted folder</li>
+        <li>Double-click <code>SilentHorizon.exe</code> to launch the game</li>
+      </ol>
+      <div class="install-note">If Windows Defender warns you, click <strong>More info → Run anyway</strong>. This is normal for unsigned indie games.</div>
+    </div>
+
+    <div class="install-card">
+      <div class="install-card-header">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" stroke="currentColor" stroke-width="1.4"/><path d="M9 4v5l3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span class="install-os-badge">Linux</span>
+      </div>
+      <ol class="install-steps">
+        <li>Click the <strong>Linux</strong> download button above</li>
+        <li>Extract the <code>.zip</code> file — right-click and <strong>Extract Here</strong>, or run <code>unzip SilentHorizon-Linux.zip</code></li>
+        <li>Open a terminal inside the extracted folder</li>
+        <li>Make the launcher executable: <code>chmod +x SilentHorizon</code></li>
+        <li>Run the game: <code>./SilentHorizon</code></li>
+      </ol>
+      <div class="install-note">Requires Java to be installed. Most Linux distros include it — if not, run <code>sudo apt install default-jre</code></div>
+    </div>
+
+    <div class="install-card" style="grid-column: 1 / -1;">
+      <div class="install-card-header">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.1 2 2 5.1 2 9s3.1 7 7 7 7-3.1 7-7-3.1-7-7-7zm0 2c1.2 0 2.3.4 3.2 1H5.8C6.7 4.4 7.8 4 9 4zm-5 5c0-.7.1-1.4.4-2h9.2c.3.6.4 1.3.4 2s-.1 1.4-.4 2H4.4C4.1 10.4 4 9.7 4 9zm5 5c-1.2 0-2.3-.4-3.2-1h6.4C11.3 13.6 10.2 14 9 14z" fill="currentColor" opacity="0.7"/></svg>
+        <span class="install-os-badge">macOS &nbsp;<span style="font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--muted);font-weight:400;letter-spacing:0.2em;">COMING SOON</span></span>
+      </div>
+      <ol class="install-steps">
+        <li>Download the correct version for your Mac — <strong>Apple Silicon</strong> (M1, M2, M3, M4 chips) or <strong>Intel</strong> (older Macs)</li>
+        <li>Extract the <code>.zip</code> — double-click it in Finder</li>
+        <li>Drag the <code>.app</code> file to your Applications folder</li>
+        <li>The first time you open it, macOS will block it. Go to <strong>System Settings → Privacy &amp; Security</strong> and click <strong>Open Anyway</strong></li>
+      </ol>
+      <div class="install-note">macOS blocks apps from unidentified developers by default. This is expected for indie games — the game is safe to run.</div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ── CHANGELOG ────────────────────────────────────────────────────── -->
 <section class="changelog-section">
   <p class="section-label reveal">Release notes</p>
@@ -613,7 +742,7 @@
       <li class="add">Arrow loot drops from archer enemies, ground pickup system</li>
       <li class="add">YOU DIED and victory sequences with particle effects</li>
       <li class="add">Smooth sword sweep with motion trail and locked-direction animation</li>
-      <li class="add">Available on Windows, Linux, macOS Apple Silicon and macOS Intel</li>
+      <li class="add">Available on Windows and Linux — macOS coming soon</li>
     </ul>
   </div>
 
@@ -654,7 +783,6 @@
       <div class="contact-label">YouTube</div>
       <div class="contact-value">@SilentHorizonGame</div>
     </a>
-
 
     <a href="https://github.com/pizzacraft" target="_blank" class="contact-card">
       <div class="contact-icon">
